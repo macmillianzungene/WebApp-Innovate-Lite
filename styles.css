@@ -6,7 +6,7 @@ body {
 }
 
 header {
-  background: #333;
+  background: #e13030;
   color: #fff;
   padding: 10px 0;
 }
@@ -33,7 +33,7 @@ nav ul li a {
   background: url("cover-image.jpg") no-repeat center center;
   background-size: cover;
   padding: 100px 0;
-  color: #fff;
+  color: #d19090;
 }
 
 .cover h1 {
@@ -64,10 +64,11 @@ section {
   width: 100%;
   max-width: 300px;
   height: auto;
+  border-radius: 5px;
 }
 
 footer {
-  background: #333;
+  background: #e13030;
   color: #fff;
   text-align: center;
   padding: 10px 0;
