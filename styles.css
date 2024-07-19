@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
-  background-color: aqua;
+  background-color: #ebf2ce;
 }
 
 header {
@@ -62,7 +62,7 @@ section {
   margin: 40px 0;
   padding: 10px;
   border-radius: 50px;
-  background-color: #ebf2ce;
+  background-color: aqua;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
