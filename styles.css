@@ -35,7 +35,6 @@ nav ul li a {
   background-size: cover;
   padding: 100px 0;
   color: #d19090;
-  border: #e13030;
 }
 
 .cover h1 {
@@ -60,6 +59,12 @@ section {
 
 .feature {
   margin: 20px 0;
+  flex-basis: 45%;
+  margin: 40px 0;
+  padding: 20px;
+  border-radius: 50px;
+  background-color: #ebf2ce;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .feature img {
