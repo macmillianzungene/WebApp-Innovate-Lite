@@ -6,26 +6,56 @@
     <title>User Registration</title>
     <link
       rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='css/style.css') }}"
+      href="{{ url_for('static', filename='css/styles.css') }}"
     />
   </head>
   <body>
-    <h2>User Registration</h2>
-    <form method="POST">
-      <label for="fullname">Full Name:</label>
-      <input type="text" name="fullname" required /><br />
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="registration.html" class="active">Register</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="registration-form">
+      <h2>Create an Account</h2>
+      <form id="register-form" action="{{ url_for('register') }}" method="POST">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" required />
 
-      <label for="email">Email:</label>
-      <input type="email" name="email" required /><br />
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
 
-      <label for="username">Username:</label>
-      <input type="text" name="username" required /><br />
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
 
-      <label for="password">Password:</label>
-      <input type="password" name="password" required /><br />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
 
-      <input type="submit" value="Register" />
-    </form>
+        <label for="confirm-password">Confirm Password</label>
+        <input
+          type="password"
+          id="confirm-password"
+          name="confirm-password"
+          required
+        />
+
+        <!-- Social login buttons -->
+        <p>Or register with:</p>
+        <div class="social-login">
+          <button type="button" class="facebook-login">Facebook</button>
+          <button type="button" class="google-login">Google</button>
+        </div>
+
+        <button type="submit">Register</button>
+      </form>
+      <p>Already have an account? <a href="login.html">Log in here</a>.</p>
+    </section>
+    <footer>
+      <p>&copy; 2024 WebApp Innovate Lite. All rights reserved.</p>
+    </footer>
+    <script src="registration.js"></script>
   </body>
 </html>
