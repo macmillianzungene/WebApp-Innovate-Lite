@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/tasks" class="active">Tasks</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="task-manager">
+        <h2>Your Tasks</h2>
+        <form method="POST">
+            <label for="title">Task Title</label>
+            <input type="text" id="title" name="title" required />
+
+            <label for="description">Task Description</label>
+            <textarea id="description" name="description"></textarea>
+
+            <button type="submit">Add Task</button>
+        </form>
+
+        <ul class="task-list">
+            {% for task in tasks %}
+                <li>
+                    <h3>{{ task.title }}</h3>
+                    <p>{{ task.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+</body>
+</html>
+

@@ -1,49 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/styles.css') }}"
-    />
-  </head>
-  <body>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
     <header>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="registration.html">Register</a></li>
-          <li><a href="login.html" class="active">Login</a></li>
-        </ul>
-      </nav>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/login" class="active">Login</a></li>
+            </ul>
+        </nav>
     </header>
-    <section class="login-form">
-      <h2>Login to Your Account</h2>
-      <form id="login-form" action="{{ url_for('login') }}" method="POST">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
+    <section class="registration-form">
+        <h2>Login to Your Account</h2>
+        <form method="POST">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required />
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
 
-        <!-- Social login buttons -->
-        <p>Or login with:</p>
-        <div class="social-login">
-          <button type="button" class="facebook-login">Facebook</button>
-          <button type="button" class="google-login">Google</button>
-        </div>
-
-        <button type="submit">Login</button>
-      </form>
-      <p>
-        Don't have an account? <a href="registration.html">Register here</a>.
-      </p>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="/register">Register here</a>.</p>
     </section>
-    <footer>
-      <p>&copy; 2024 WebApp Innovate Lite. All rights reserved.</p>
-    </footer>
-    <script src="login.js"></script>
-  </body>
+</body>
 </html>
+>
