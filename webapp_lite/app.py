@@ -9,6 +9,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/webapp_innovate_lite
 app.config['SECRET_KEY'] = 'your_secret_key_here'
 db = SQLAlchemy(app)
 
+# Home route
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+
 # User model
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
