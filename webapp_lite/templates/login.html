@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/register">Register</a></li>
-                <li><a href="/login" class="active">Login</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/register">Register</a></li>
+          <li><a href="/login" class="active">Login</a></li>
+          <li><a href="/task_manager">Tasks</a></li>
+        </ul>
+      </nav>
     </header>
     <section class="registration-form">
-        <h2>Login to Your Account</h2>
-        <form method="POST">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required />
+      <h2>Login to Your Account</h2>
+      <form method="POST">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
 
-            <button type="submit">Login</button>
-        </form>
-        <p>Don't have an account? <a href="/register">Register here</a>.</p>
+        <button type="submit">Login</button>
+      </form>
+      <p>Don't have an account? <a href="/register">Register here</a>.</p>
     </section>
-</body>
+  </body>
 </html>
 >

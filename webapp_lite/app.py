@@ -2,11 +2,15 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+from webapp_lite import db
+from webapp_lite.models import User
+
 
 # Initialize Flask app
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/webapp_innovate_lite.db'
-app.config['SECRET_KEY'] = 'your_secret_key_here'
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'instance/users.db')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'fallback_secret_key')
 db = SQLAlchemy(app)
 
 # Home route
@@ -22,12 +26,14 @@ class User(db.Model):
     email = db.Column(db.String(150), unique=True, nullable=False)
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
+    tasks = db.relationship('Task', backref='user', lazy=True)
 
 # Task model
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150), nullable=False)
-    description = db.Column(db.Text, nullable=True)
+    due_date = db.Column(db.String(10), nullable=False)  # Add due date
+    status = db.Column(db.String(50), nullable=False)    # Add status (e.g., Pending, Completed)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 # Registration route
@@ -88,17 +94,44 @@ def task_manager():
 
     if request.method == 'POST':
         title = request.form['title']
+        due_date = request.form['due_date']  # Added due date input
+        status = request.form['status']      # Added status input
         description = request.form['description']
         user_id = session['user_id']
 
-        new_task = Task(title=title, description=description, user_id=user_id)
+        new_task = Task(title=title, description=description, due_date=due_date, status=status, user_id=user_id)
         db.session.add(new_task)
         db.session.commit()
 
         flash('Task created successfully!', 'success')
 
-    tasks = Task.query.filter_by(user_id=session['user_id']).all()
+    user_id = session['user_id']
+    tasks = Task.query.filter_by(user_id=user_id).all()
     return render_template('task_manager.html', tasks=tasks)
+
+# Edit Task route (for updating tasks)
+@app.route('/edit_task/<int:task_id>', methods=['GET', 'POST'])
+def edit_task(task_id):
+    task = Task.query.get(task_id)
+    if request.method == 'POST':
+        task.title = request.form['title']
+        task.due_date = request.form['due_date']
+        task.status = request.form['status']
+        task.description = request.form['description']
+        db.session.commit()
+        flash('Task updated successfully!', 'success')
+        return redirect(url_for('task_manager'))
+
+    return render_template('edit_task.html', task=task)
+
+# Delete Task route
+@app.route('/delete_task/<int:task_id>', methods=['POST'])
+def delete_task(task_id):
+    task = Task.query.get(task_id)
+    db.session.delete(task)
+    db.session.commit()
+    flash('Task deleted successfully!', 'success')
+    return redirect(url_for('task_manager'))
 
 # Logout route
 @app.route('/logout')
@@ -109,7 +142,6 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    if not os.path.exists('instance/webapp_innovate_lite.db'):
+    with app.app_context():
         db.create_all()
     app.run(debug=True)
-
